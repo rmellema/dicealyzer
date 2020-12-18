@@ -26,3 +26,7 @@ class NumberPool(AbstractDicePool):
         if value != self.number:
             return 0
         return 1
+
+def num(number):
+    "Alias for creating a numberpool."
+    return NumberPool(number)
