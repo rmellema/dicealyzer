@@ -60,18 +60,22 @@ class SumPool(BinaryOperatorPool):
     "Create a sum of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(add, '+', *operands)
+AbstractDicePool.__add__ = lambda l, r: SumPool(l, r).simplify()
 
 class SubtractPool(BinaryOperatorPool):
     "Create a negative sum of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(sub, '-', *operands)
+AbstractDicePool.__sub__ = lambda l, r: SubtractPool(l, r).simplify()
 
 class ProductPool(BinaryOperatorPool):
     "Create a product of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(mul, '*', *operands)
+AbstractDicePool.__mul__ = lambda l, r: ProductPool(l, r).simplify()
 
 class DivisionPool(BinaryOperatorPool):
     "Create a fraction of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(div, '/', *operands)
+AbstractDicePool.__truediv__ = lambda l, r: DivisionPool(l, r).simplify()
