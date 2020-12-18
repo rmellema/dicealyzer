@@ -27,6 +27,9 @@ class DiceTypePool(AbstractDicePool):
     def __str__(self):
         return '{}d{}'.format(self.amount, self.sides)
 
+    def __repr__(self):
+        return '{}.DiceTypePool(sides={}, amount={})'.format(__name__, self.sides, self.amount)
+
     @property
     def values(self):
         return set(range(self.amount, self.sides * self.amount + 1))
@@ -51,7 +54,7 @@ class DiceDropPool(DiceTypePool):
     """
     A class to represent a dicepool where the lowest or highest dice are dropped.
     """
-    def __init__(self, sides, amount=1, drop=1, highest=False):
+    def __init__(self, sides, amount=2, drop=1, highest=False):
         super().__init__(sides, amount)
         self.drop = drop
         self.highest = highest
@@ -84,3 +87,7 @@ class DiceDropPool(DiceTypePool):
         if self.drop == 1:
             return super().__str__() + '-' + ('H' if self.highest else 'L')
         return super().__str__() + ('l' if self.highest else 'h') + str(self.drop)
+
+    def __repr__(self):
+        return '{}.DiceDropPool(sides={}, amount={}, drop={}, highest={})'\
+                    .format(__name__, self.sides, self.amount, self.drop, self.highest)

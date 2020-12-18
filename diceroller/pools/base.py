@@ -13,9 +13,9 @@ class AbstractDicePool(ABC):
         Roll the dice in this pool, and return the result. Also returns the values of all rolled
         dice.
         """
-        pass
 
     def pretty_string(self):
+        "Print the dice pool in a pretty manner"
         return str(self)
 
     @abstractmethod
@@ -26,14 +26,13 @@ class AbstractDicePool(ABC):
     @abstractmethod
     def values(self):
         "All the possible values that this dice pool can produce."
-        pass
 
     @abstractmethod
     def probability(self, value):
         "Returns the probability of a certain value being rolled."
-        pass
 
     def prob(self, value):
+        "Alias for `probability`"
         return self.probability(value)
 
     def cond_prob(self, pred):
