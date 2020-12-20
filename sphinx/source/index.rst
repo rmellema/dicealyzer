@@ -7,7 +7,7 @@ Welcome to dicealyzer.py's documentation!
    :caption: Contents:
 
     Dice notation <notation.rst>
-    Package documentation <dicealyzer.rst>
+    Package documentation <modules.rst>
 
 
 

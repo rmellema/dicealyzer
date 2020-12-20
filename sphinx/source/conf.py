@@ -21,7 +21,7 @@ import dicealyzer
 project = 'dicealyzer.py'
 copyright = '2020, René Mellema'
 author = 'René Mellema'
-
+version = dicealyzer.__version__
 
 # -- General configuration ---------------------------------------------------
 

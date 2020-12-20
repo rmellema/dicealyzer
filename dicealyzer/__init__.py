@@ -1,12 +1,14 @@
 """
-This module provides ways to define and combine pools of dice so they can be analyzed.
+This module provides ways to define and combine pools of dice so they can be analyzed. It consists
+of a submodule for :py:mod:`creating and analyzing dice pools <dicealyzer.pools>` and a module
+for :py:mod:`reading in dice pools from strings <dicealyzer.transformer>`.
 """
 import pathlib
 from functools import reduce
 from lark import Lark
 
 from . import pools, transformer
-__VERSION__ = '0.0.1'
+__version__ = '0.0.1'
 
 def get_parser():
     """
