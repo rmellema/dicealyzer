@@ -1,7 +1,7 @@
 """
 This module contains the transformer class, that turns a given parse tree into a dice pool.
 """
-from operator import add, sub, mul, floordiv
+from operator import add, sub, mul, truediv
 
 from lark.visitors import Transformer, v_args
 
@@ -67,7 +67,7 @@ class DicePoolTransformer(Transformer):
 
     def div(self, p1, p2):
         "Combined several dice pools by dividing them."
-        return BinaryOperatorPool(floordiv, '/', p1, p2).simplify()
+        return BinaryOperatorPool(truediv, '/', p1, p2).simplify()
 
     def start(self, *n):
         "This grammar only returns one object, which is a dice pool."
