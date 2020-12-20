@@ -1,5 +1,6 @@
 """
-The module for dice pools consisting of other different dice pools.
+The module for dice pools consisting of other different dice pools. It also installs operators on
+`AbstractDicePool` to make it easier to combine dice pools in Python.
 """
 from functools import reduce
 from itertools import chain, product
@@ -80,3 +81,40 @@ class DivisionPool(BinaryOperatorPool):
     def __init__(self, *operands):
         super().__init__(div, '/', *operands)
 AbstractDicePool.__truediv__ = lambda l, r: DivisionPool(l, r).simplify()
+
+class ConstPool(AbstractDicePool):
+    """
+    A class to represent a single constant value without rolling. Useful for combing with other dice
+    pools.
+    """
+    def __init__(self, n):
+        self.const = n
+
+    def __str__(self):
+        return str(self.const)
+
+    def roll(self):
+        # There are no dice rolled here, so return an empty list
+        return self.const, []
+
+    @property
+    def values(self):
+        return set([self.const])
+
+    def probability(self, value):
+        if value != self.const:
+            return 0
+        return 1
+
+def def_op_func(cls):
+    "Defines a python function that can be used on a class for operator overloading."
+    def op_func(lhs, rhs):
+        if not isinstance(rhs, AbstractDicePool):
+            rhs = ConstPool(rhs)
+        return cls(lhs, rhs).simplify()
+    return op_func
+
+AbstractDicePool.__add__ = def_op_func(SumPool)
+AbstractDicePool.__sub__ = def_op_func(SubtractPool)
+AbstractDicePool.__mul__ = def_op_func(ProductPool)
+AbstractDicePool.__truediv__ = def_op_func(DivisionPool)

@@ -5,7 +5,7 @@ from operator import add, sub, mul, floordiv
 
 from lark.visitors import Transformer, v_args
 
-from .pools import BinaryOperatorPool, DiceTypePool, DiceDropPool, NumberPool
+from .pools import BinaryOperatorPool, DiceTypePool, DiceDropPool, ConstPool
 
 def keep_sum(rolls, keep, lowest=False):
     "A small helper function for keeping certain dice rolls"
@@ -22,7 +22,7 @@ class DicePoolTransformer(Transformer):
 
     def constpool(self, n):
         "The constpool rule only read NumberPools, so return one of those."
-        return NumberPool(n)
+        return ConstPool(n)
 
     def dice(self, *values):
         "This rule reads in the number of dice and their sides. Returns them as a tuple of ints."

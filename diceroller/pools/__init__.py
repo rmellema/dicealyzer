@@ -12,26 +12,3 @@ is discrete.
 from .base import AbstractDicePool
 from .dice import DiceTypePool, DiceDropPool
 from .operator import *
-
-class NumberPool(AbstractDicePool):
-    """
-    A class to represent single numbers without rolling. Useful for combing with other dice pools.
-    """
-    def __init__(self, n):
-        self.number = n
-
-    def __str__(self):
-        return str(self.number)
-
-    def roll(self):
-        # There are no dice rolled here, so return an empty list
-        return self.number, []
-
-    @property
-    def values(self):
-        return set([self.number])
-
-    def probability(self, value):
-        if value != self.number:
-            return 0
-        return 1
