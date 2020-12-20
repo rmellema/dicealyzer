@@ -30,6 +30,7 @@ author = 'René Mellema'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.githubpages',
     'sphinx.ext.viewcode',
 ]
@@ -57,3 +58,7 @@ html_static_path = ['_static']
 
 
 # -- Extension configuration -------------------------------------------------
+intersphinx_mapping = {
+        'python': ('https://docs.python.org/3', None),
+        'Lark': ('https://lark-parser.readthedocs.io/en/latest', None),
+}
