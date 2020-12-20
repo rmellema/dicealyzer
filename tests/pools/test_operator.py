@@ -4,7 +4,7 @@ Tests for the various operator pools.
 import unittest as ut
 
 from diceroller.pools.operator import SumPool, SubtractPool, ProductPool, DivisionPool
-from diceroller.pools.dice import dice
+from diceroller.pools.dice import DiceTypePool as Dice
 
 class BinaryOperatorTests(ut.TestCase):
     "Test cases for the binary operator."
@@ -14,20 +14,20 @@ class BinaryOperatorTests(ut.TestCase):
 
     def test_prob_sum_sum(self):
         "Test the sum for probabilities for the SumPool"
-        pool = SumPool(dice(6, 2), dice(4, 3))
+        pool = SumPool(Dice(6, 2), Dice(4, 3))
         self.assertProbSum(pool)
 
     def test_prob_sum_sub(self):
         "Test the sum for probabilities for the SubtractPool"
-        pool = SubtractPool(dice(6, 2), dice(4, 3))
+        pool = SubtractPool(Dice(6, 2), Dice(4, 3))
         self.assertProbSum(pool)
 
     def test_prob_sum_mul(self):
         "Test the sum for probabilities for the ProductPool"
-        pool = ProductPool(dice(6, 2), dice(4, 3))
+        pool = ProductPool(Dice(6, 2), Dice(4, 3))
         self.assertProbSum(pool)
 
     def test_prob_sum_div(self):
         "Test the sum for probabilities for the DivisionPool"
-        pool = DivisionPool(dice(6, 2), dice(4, 3))
+        pool = DivisionPool(Dice(6, 2), Dice(4, 3))
         self.assertProbSum(pool)

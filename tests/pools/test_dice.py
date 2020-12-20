@@ -62,6 +62,14 @@ class DiceTypePoolTester(ut.TestCase):
         self.assertAlmostEqual(1/36, pool.prob(12),
                                msg="Probability for 12 calcualted incorrectly")
 
+    def test_pred_prob(self):
+        "Tests if the `pred_prob` for the equality predicate is the same as `probability`."
+        pool = DiceTypePool(8, 4)
+        for value in pool.values:
+            self.assertEqual(pool.probability(value), pool.pred_prob(lambda x: x == value),
+                             msg="The probability for a given value should be the same as the " +\
+                             "probability that a roll is equal to that value.")
+
 class TestDropPool(ut.TestCase):
     "Test case for the DiceDropPool"
     def test_normalization(self):

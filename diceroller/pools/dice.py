@@ -46,10 +46,6 @@ class DiceTypePool(AbstractDicePool):
         self._prob[value] = prob
         return prob
 
-def dice(sides, amount=1):
-    "Convience functions for defining pools with one dice type"
-    return DiceTypePool(sides, amount)
-
 class DiceDropPool(DiceTypePool):
     """
     A class to represent a dicepool where the lowest or highest dice are dropped.

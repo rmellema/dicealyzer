@@ -9,7 +9,8 @@ from .base import AbstractDicePool
 
 class BinaryOperatorPool(AbstractDicePool):
     """
-    A class to represent a dicepool with multiple types of dice.
+    A class to represent multiple dice pools that are combined by an operator. This operator is
+    assumed to work with the python function `reduce`.
     """
     def __init__(self, operator, operator_str, *operands):
         self.operator = operator
