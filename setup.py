@@ -26,7 +26,7 @@ setup(name='dicealyzer.py',
       install_requires=['lark-parser'],
       extras_require={
           'dev': ['pylint>=1.7',
-                  'spinx>=4.0.0'],
+                  'Sphinx>=3.3.0'],
           },
       python_requires='~=3.4',
 
