@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dicealyzer.pools.dice &#8212; dicealyzer.py  documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for dicealyzer.pools.dice</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A module to represent dice pools consisting of one type of dice.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AbstractDicePool</span>
+
+<div class="viewcode-block" id="DiceTypePool"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceTypePool">[docs]</a><span class="k">class</span> <span class="nc">DiceTypePool</span><span class="p">(</span><span class="n">AbstractDicePool</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent a dicepool with multiple of one dice.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sides</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">=</span> <span class="n">sides</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="DiceTypePool.roll_all"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceTypePool.roll_all">[docs]</a>    <span class="k">def</span> <span class="nf">roll_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&quot;Roll all the dice in this pool and return results as a list&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="DiceTypePool.roll"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceTypePool.roll">[docs]</a>    <span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rolls</span><span class="p">),</span> <span class="n">rolls</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">d</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.DiceTypePool(sides=</span><span class="si">{}</span><span class="s1">, amount=</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="DiceTypePool.probability"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceTypePool.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">possibilities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">sum</span><span class="p">,</span> <span class="n">rolls</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span><span class="p">]),</span><span class="n">possibilities</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span>
+        <span class="k">return</span> <span class="n">prob</span></div></div>
+
+<div class="viewcode-block" id="DiceDropPool"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceDropPool">[docs]</a><span class="k">class</span> <span class="nc">DiceDropPool</span><span class="p">(</span><span class="n">DiceTypePool</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to represent a dicepool where the lowest or highest dice are dropped.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sides</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">highest</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sides</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">=</span> <span class="n">drop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highest</span> <span class="o">=</span> <span class="n">highest</span>
+
+    <span class="k">def</span> <span class="nf">_drop_rolls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rolls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rolls</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">:]</span>
+
+<div class="viewcode-block" id="DiceDropPool.roll"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceDropPool.roll">[docs]</a>    <span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">roll_all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drop_rolls</span><span class="p">(</span><span class="n">rolls</span><span class="p">)),</span> <span class="n">rolls</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">*</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="DiceDropPool.probability"><a class="viewcode-back" href="../../../dicealyzer.pools.dice.html#dicealyzer.pools.dice.DiceDropPool.probability">[docs]</a>    <span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">possibilities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">**</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span>
+        <span class="n">rolls</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_drop_rolls</span><span class="p">(</span><span class="n">r</span><span class="p">)),</span> <span class="n">rolls</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="nb">len</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">value</span><span class="p">]),</span> <span class="n">possibilities</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prob</span><span class="p">[</span><span class="n">value</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span>
+        <span class="k">return</span> <span class="n">prob</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;H&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">highest</span> <span class="k">else</span> <span class="s1">&#39;L&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;l&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">highest</span> <span class="k">else</span> <span class="s1">&#39;h&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.DiceDropPool(sides=</span><span class="si">{}</span><span class="s1">, amount=</span><span class="si">{}</span><span class="s1">, drop=</span><span class="si">{}</span><span class="s1">, highest=</span><span class="si">{}</span><span class="s1">)&#39;</span>\
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sides</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">drop</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">highest</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">dicealyzer.py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notation.html"> Dice notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html"> Package documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  <li><a href="../../dicealyzer.html">dicealyzer</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, René Mellema.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dicealyzer.pools.operator module &#8212; dicealyzer.py  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dicealyzer.transformer module" href="dicealyzer.transformer.html" />
+    <link rel="prev" title="dicealyzer.pools.dice module" href="dicealyzer.pools.dice.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-dicealyzer.pools.operator">
+<span id="dicealyzer-pools-operator-module"></span><h1>dicealyzer.pools.operator module<a class="headerlink" href="#module-dicealyzer.pools.operator" title="Permalink to this headline">¶</a></h1>
+<p>The module for dice pools consisting of other different dice pools. It also installs operators on
+<cite>AbstractDicePool</cite> to make it easier to combine dice pools in Python.</p>
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">BinaryOperatorPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">operator</span></em>, <em class="sig-param"><span class="n">operator_str</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#BinaryOperatorPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dicealyzer.pools.base.html#dicealyzer.pools.base.AbstractDicePool" title="dicealyzer.pools.base.AbstractDicePool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.base.AbstractDicePool</span></code></a></p>
+<p>A class to represent multiple dice pools that are combined by an operator. This operator is
+assumed to work with the python function <cite>reduce</cite>.</p>
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool.pretty_string">
+<code class="sig-name descname">pretty_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#BinaryOperatorPool.pretty_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool.pretty_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the dice pool in a pretty manner.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool.probability">
+<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#BinaryOperatorPool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool.probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the probability of a certain value being rolled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool.roll">
+<code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#BinaryOperatorPool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool.roll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
+dice as a list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool.simplify">
+<code class="sig-name descname">simplify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#BinaryOperatorPool.simplify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool.simplify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simplify this Pool so it does not contain instances of the same type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.BinaryOperatorPool.values">
+<em class="property">property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.operator.BinaryOperatorPool.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
+preferred, but not required.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.ConstPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">ConstPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#ConstPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.ConstPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dicealyzer.pools.base.html#dicealyzer.pools.base.AbstractDicePool" title="dicealyzer.pools.base.AbstractDicePool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.base.AbstractDicePool</span></code></a></p>
+<p>A class to represent a single constant value without rolling. Useful for combing with other dice
+pools.</p>
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.ConstPool.probability">
+<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#ConstPool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.ConstPool.probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the probability of a certain value being rolled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.ConstPool.roll">
+<code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#ConstPool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.ConstPool.roll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
+dice as a list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.operator.ConstPool.values">
+<em class="property">property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.operator.ConstPool.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
+preferred, but not required.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.DivisionPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">DivisionPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#DivisionPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.DivisionPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dicealyzer.pools.operator.BinaryOperatorPool" title="dicealyzer.pools.operator.BinaryOperatorPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.operator.BinaryOperatorPool</span></code></a></p>
+<p>Create a fraction of multiple dice pools.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.ProductPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">ProductPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#ProductPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.ProductPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dicealyzer.pools.operator.BinaryOperatorPool" title="dicealyzer.pools.operator.BinaryOperatorPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.operator.BinaryOperatorPool</span></code></a></p>
+<p>Create a product of multiple dice pools.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.SubtractPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">SubtractPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#SubtractPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.SubtractPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dicealyzer.pools.operator.BinaryOperatorPool" title="dicealyzer.pools.operator.BinaryOperatorPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.operator.BinaryOperatorPool</span></code></a></p>
+<p>Create a negative sum of multiple dice pools.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="dicealyzer.pools.operator.SumPool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">SumPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">operands</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#SumPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.SumPool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#dicealyzer.pools.operator.BinaryOperatorPool" title="dicealyzer.pools.operator.BinaryOperatorPool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.operator.BinaryOperatorPool</span></code></a></p>
+<p>Create a sum of multiple dice pools.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.pools.operator.def_op_func">
+<code class="sig-prename descclassname">dicealyzer.pools.operator.</code><code class="sig-name descname">def_op_func</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cls</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/operator.html#def_op_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.operator.def_op_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines a python function that can be used on a class for operator overloading.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">dicealyzer.py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notation.html"> Dice notation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html"> Package documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="dicealyzer.html">dicealyzer package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">dicealyzer</a><ul>
+  <li><a href="dicealyzer.html">dicealyzer package</a><ul>
+  <li><a href="dicealyzer.pools.html">dicealyzer.pools package</a><ul>
+      <li>Previous: <a href="dicealyzer.pools.dice.html" title="previous chapter">dicealyzer.pools.dice module</a></li>
+      <li>Next: <a href="dicealyzer.transformer.html" title="next chapter">dicealyzer.transformer module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, René Mellema.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/dicealyzer.pools.operator.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dicealyzer.transformer &#8212; dicealyzer.py  documentation</title>
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for dicealyzer.transformer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains the transformer class, that turns a given parse tree into a dice pool.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">truediv</span>
+
+<span class="kn">from</span> <span class="nn">lark.visitors</span> <span class="kn">import</span> <span class="n">Transformer</span><span class="p">,</span> <span class="n">v_args</span>
+
+<span class="kn">from</span> <span class="nn">.pools</span> <span class="kn">import</span> <span class="n">BinaryOperatorPool</span><span class="p">,</span> <span class="n">DiceTypePool</span><span class="p">,</span> <span class="n">DiceDropPool</span><span class="p">,</span> <span class="n">ConstPool</span>
+
+<div class="viewcode-block" id="keep_sum"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.keep_sum">[docs]</a><span class="k">def</span> <span class="nf">keep_sum</span><span class="p">(</span><span class="n">rolls</span><span class="p">,</span> <span class="n">keep</span><span class="p">,</span> <span class="n">lowest</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="s2">&quot;A small helper function for keeping certain dice rolls&quot;</span>
+    <span class="n">rolls</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">lowest</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rolls</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">rolls</span><span class="p">)</span> <span class="o">-</span> <span class="n">keep</span><span class="p">:])</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer">[docs]</a><span class="nd">@v_args</span><span class="p">(</span><span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">DicePoolTransformer</span><span class="p">(</span><span class="n">Transformer</span><span class="p">):</span>
+    <span class="s2">&quot;Transforms a read statement into a dice pool that can be rolled multiple times.&quot;</span>
+    <span class="c1"># pylint: disable=no-self-use, invalid-name</span>
+<div class="viewcode-block" id="DicePoolTransformer.number"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.number">[docs]</a>    <span class="k">def</span> <span class="nf">number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="s2">&quot;Numbers should be read as ints.&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.constpool"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.constpool">[docs]</a>    <span class="k">def</span> <span class="nf">constpool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="s2">&quot;The constpool rule only read NumberPools, so return one of those.&quot;</span>
+        <span class="k">return</span> <span class="n">ConstPool</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.dice"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.dice">[docs]</a>    <span class="k">def</span> <span class="nf">dice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">):</span>
+        <span class="s2">&quot;This rule reads in the number of dice and their sides. Returns them as a tuple of ints.&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">amount</span><span class="p">,</span> <span class="n">sides</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">sides</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">sides</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.pool"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.pool">[docs]</a>    <span class="k">def</span> <span class="nf">pool</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dice</span><span class="p">):</span>
+        <span class="s2">&quot;Reads in a simple dice pool.&quot;</span>
+        <span class="k">return</span> <span class="n">DiceTypePool</span><span class="p">(</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.drop_lowest"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.drop_lowest">[docs]</a>    <span class="k">def</span> <span class="nf">drop_lowest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dice</span><span class="p">):</span>
+        <span class="s2">&quot;Reads in a dice pool that drops the lowest dice.&quot;</span>
+        <span class="k">return</span> <span class="n">DiceDropPool</span><span class="p">(</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.drop_highest"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.drop_highest">[docs]</a>    <span class="k">def</span> <span class="nf">drop_highest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dice</span><span class="p">):</span>
+        <span class="s2">&quot;Reads in a dice pool that drops the highest dice.&quot;</span>
+        <span class="k">return</span> <span class="n">DiceDropPool</span><span class="p">(</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.keep_highest"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.keep_highest">[docs]</a>    <span class="k">def</span> <span class="nf">keep_highest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dice</span><span class="p">,</span> <span class="n">keep</span><span class="p">):</span>
+        <span class="s2">&quot;Reads in a dice pool that keeps the `keep` highest.&quot;</span>
+        <span class="k">return</span> <span class="n">DiceDropPool</span><span class="p">(</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">keep</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.keep_lowest"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.keep_lowest">[docs]</a>    <span class="k">def</span> <span class="nf">keep_lowest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dice</span><span class="p">,</span> <span class="n">keep</span><span class="p">):</span>
+        <span class="s2">&quot;Reads in a dice pool that drops the `keep` lowest.&quot;</span>
+        <span class="k">return</span> <span class="n">DiceDropPool</span><span class="p">(</span><span class="n">dice</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">dice</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">keep</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.add"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+        <span class="s2">&quot;Combined several dice pools by adding them up.&quot;</span>
+        <span class="k">return</span> <span class="n">BinaryOperatorPool</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.sub"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.sub">[docs]</a>    <span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+        <span class="s2">&quot;Combined several dice pools by subtracting them.&quot;</span>
+        <span class="k">return</span> <span class="n">BinaryOperatorPool</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.mul"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.mul">[docs]</a>    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+        <span class="s2">&quot;Combined several dice pools by multipolying them.&quot;</span>
+        <span class="k">return</span> <span class="n">BinaryOperatorPool</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.div"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+        <span class="s2">&quot;Combined several dice pools by dividing them.&quot;</span>
+        <span class="k">return</span> <span class="n">BinaryOperatorPool</span><span class="p">(</span><span class="n">truediv</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DicePoolTransformer.start"><a class="viewcode-back" href="../../dicealyzer.transformer.html#dicealyzer.transformer.DicePoolTransformer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">n</span><span class="p">):</span>
+        <span class="s2">&quot;This grammar only returns one object, which is a dice pool.&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">n</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">dicealyzer.py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../notation.html"> Dice notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html"> Package documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../dicealyzer.html">dicealyzer</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, René Mellema.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

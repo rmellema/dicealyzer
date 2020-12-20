@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dicealyzer package &#8212; dicealyzer.py  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dicealyzer.pools package" href="dicealyzer.pools.html" />
+    <link rel="prev" title="dicealyzer" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="dicealyzer-package">
+<h1>dicealyzer package<a class="headerlink" href="#dicealyzer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dicealyzer.pools.html">dicealyzer.pools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dicealyzer.pools.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dicealyzer.pools.base.html">dicealyzer.pools.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicealyzer.pools.dice.html">dicealyzer.pools.dice module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dicealyzer.pools.operator.html">dicealyzer.pools.operator module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dicealyzer.pools.html#module-dicealyzer.pools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dicealyzer.transformer.html">dicealyzer.transformer module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-dicealyzer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dicealyzer" title="Permalink to this headline">¶</a></h2>
+<p>This module provides ways to define and combine pools of dice so they can be analyzed. It consists
+of a submodule for <a class="reference internal" href="dicealyzer.pools.html#module-dicealyzer.pools" title="dicealyzer.pools"><code class="xref py py-mod docutils literal notranslate"><span class="pre">creating</span> <span class="pre">and</span> <span class="pre">analyzing</span> <span class="pre">dice</span> <span class="pre">pools</span></code></a> and a module
+for <a class="reference internal" href="dicealyzer.transformer.html#module-dicealyzer.transformer" title="dicealyzer.transformer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reading</span> <span class="pre">in</span> <span class="pre">dice</span> <span class="pre">pools</span> <span class="pre">from</span> <span class="pre">strings</span></code></a>.</p>
+<dl class="py function">
+<dt id="dicealyzer.compare">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">dpools</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare a group of pools on the values they can produce and their probabilities. Returns a
+dictionary from numbers to a list of numbers. The keys are the values that the pools together
+can produce, and the values are the probabilities that the pools will produce those values, in
+the same order as the input.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.dice">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.dice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a simple dice pool</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.get_parser">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">get_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#get_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.get_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the parser for parsing the dice notation. Returns a <a class="reference external" href="https://lark-parser.readthedocs.io/en/latest/classes.html#lark.Lark" title="(in Lark)"><code class="xref py py-class docutils literal notranslate"><span class="pre">lark.Lark</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.inspect">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">inspect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pool</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.inspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inspect a pool for the values it can produce and their probabilities.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.read_dice">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">read_dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#read_dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.read_dice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a dice pool from a string using standard dice notation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.roll_dice">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">roll_dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#roll_dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.roll_dice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read in a dice pool from a string and roll it.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">dicealyzer.py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="notation.html"> Dice notation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html"> Package documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">dicealyzer package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">dicealyzer</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">dicealyzer</a></li>
+      <li>Next: <a href="dicealyzer.pools.html" title="next chapter">dicealyzer.pools package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, René Mellema.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/dicealyzer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

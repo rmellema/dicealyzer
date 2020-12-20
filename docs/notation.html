@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice notation &#8212; dicealyzer.py  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dicealyzer" href="modules.html" />
+    <link rel="prev" title="Welcome to dicealyzer.py’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="dice-notation">
+<h1>Dice notation<a class="headerlink" href="#dice-notation" title="Permalink to this headline">¶</a></h1>
+<p>This page describes the used notation in detail, based on the lark grammar. The point of
+the notation is to stay as close to the standard <cite>dice notation</cite> as possible. However, as
+this notation is not entirely standard we had to make some choices. Furthermore, to make
+it easier to work with, this notation ignores whitespace.</p>
+<p>The base unit of the notation is writing down dice themselves. These are written as
+<code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">d</span> <span class="pre">S</span></code> or <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">D</span> <span class="pre">S</span></code> where <code class="docutils literal notranslate"><span class="pre">A</span></code> is the number of dice to roll and <code class="docutils literal notranslate"><span class="pre">S</span></code> is the number of
+sides on the dice. Both <code class="docutils literal notranslate"><span class="pre">A</span></code> and <code class="docutils literal notranslate"><span class="pre">S</span></code> need to be integers. When it is 1, the <code class="docutils literal notranslate"><span class="pre">A</span></code> can
+be left off. So for example, a standard six sided dice is written as <code class="docutils literal notranslate"><span class="pre">d6</span></code>, and 3 of them
+is written as <code class="docutils literal notranslate"><span class="pre">3d6</span></code>. When you specify multiple dice, their values are added together for
+further calculations.</p>
+<p>The notation can deal with dropping the lowest or highest rolled values. Keeping the
+lowest values works by adding <code class="docutils literal notranslate"><span class="pre">l</span> <span class="pre">N</span></code> to the dice, where <code class="docutils literal notranslate"><span class="pre">l</span></code> stands for lowest, and <code class="docutils literal notranslate"><span class="pre">N</span></code>
+is the number of dice to keep. So <code class="docutils literal notranslate"><span class="pre">4d20l2</span></code> rolls 4 20 sided dice, and keeps the lowest
+2 for further calculations. If you only want to drop 1 die, <code class="docutils literal notranslate"><span class="pre">-H</span></code> (minus highest) can be
+used instead. Thus <code class="docutils literal notranslate"><span class="pre">4d6-H</span></code> rolls 4 6 sided dice, and keeps the lowest 3, the same as
+<code class="docutils literal notranslate"><span class="pre">4d6l3</span></code>.</p>
+<p>Similarly, you can also only keep the highest values. This can be done by adding <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">N</span></code> or
+<code class="docutils literal notranslate"><span class="pre">h</span> <span class="pre">N</span></code> to the dice, where <code class="docutils literal notranslate"><span class="pre">k</span></code> stands for “keep”, <code class="docutils literal notranslate"><span class="pre">h</span></code> for “highest”, and <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
+number of dice to keep. If you only want to drop the lowest die, you can add <code class="docutils literal notranslate"><span class="pre">-L</span></code> (minus
+lowest) to the dice instead. So <code class="docutils literal notranslate"><span class="pre">4d6-L</span></code> rolls 4 six-sided die, and keeps the highest
+4, same as <code class="docutils literal notranslate"><span class="pre">4d6k3</span></code>.</p>
+<p>You can also add multiple dice pools together, subtract them, multiply them, and divide
+them. This works with the usual operators <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, and <code class="docutils literal notranslate"><span class="pre">/</span></code>. Operator
+precedence is also as normal, so <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">/</span></code> bind stronger than <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">-</span></code>. You
+can use parenthesis (<code class="docutils literal notranslate"><span class="pre">(</span></code> and <code class="docutils literal notranslate"><span class="pre">)</span></code>) to influence how the operators are read in.</p>
+<p>In order to make arithmatic easier, dicealyzer can also read in integers. This makes it
+possible to write expressions such as <code class="docutils literal notranslate"><span class="pre">(2d6</span> <span class="pre">+</span> <span class="pre">6)</span> <span class="pre">*</span> <span class="pre">5</span></code>, which rolls 2 6 sided dice,
+adds 6 to the result, and multiplies it by 5.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">dicealyzer.py</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"> Dice notation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html"> Package documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to dicealyzer.py’s documentation!</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">dicealyzer</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, René Mellema.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/notation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
