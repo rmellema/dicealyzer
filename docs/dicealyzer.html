@@ -66,30 +66,9 @@
 of a submodule for <a class="reference internal" href="dicealyzer.pools.html#module-dicealyzer.pools" title="dicealyzer.pools"><code class="xref py py-mod docutils literal notranslate"><span class="pre">creating</span> <span class="pre">and</span> <span class="pre">analyzing</span> <span class="pre">dice</span> <span class="pre">pools</span></code></a> and a module
 for <a class="reference internal" href="dicealyzer.transformer.html#module-dicealyzer.transformer" title="dicealyzer.transformer"><code class="xref py py-mod docutils literal notranslate"><span class="pre">reading</span> <span class="pre">in</span> <span class="pre">dice</span> <span class="pre">pools</span> <span class="pre">from</span> <span class="pre">strings</span></code></a>.</p>
 <dl class="py function">
-<dt id="dicealyzer.compare">
-<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">dpools</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.compare" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compare a group of pools on the values they can produce and their probabilities. Returns a
-dictionary from numbers to a list of numbers. The keys are the values that the pools together
-can produce, and the values are the probabilities that the pools will produce those values, in
-the same order as the input.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="dicealyzer.dice">
-<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.dice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a simple dice pool</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="dicealyzer.get_parser">
 <code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">get_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#get_parser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.get_parser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the parser for parsing the dice notation. Returns a <a class="reference external" href="https://lark-parser.readthedocs.io/en/latest/classes.html#lark.Lark" title="(in Lark)"><code class="xref py py-class docutils literal notranslate"><span class="pre">lark.Lark</span></code></a></p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="dicealyzer.inspect">
-<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">inspect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pool</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.inspect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inspect a pool for the values it can produce and their probabilities.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -102,6 +81,27 @@ the same order as the input.</p>
 <dt id="dicealyzer.roll_dice">
 <code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">roll_dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#roll_dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.roll_dice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read in a dice pool from a string and roll it.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.dice">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">dice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#dice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.dice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a simple dice pool</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.inspect">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">inspect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pool</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#inspect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.inspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inspect a pool for the values it can produce and their probabilities.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="dicealyzer.compare">
+<code class="sig-prename descclassname">dicealyzer.</code><code class="sig-name descname">compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">dpools</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer.html#compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.compare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare a group of pools on the values they can produce and their probabilities. Returns a
+dictionary from numbers to a list of numbers. The keys are the values that the pools together
+can produce, and the values are the probabilities that the pools will produce those values, in
+the same order as the input.</p>
 </dd></dl>
 
 </div>

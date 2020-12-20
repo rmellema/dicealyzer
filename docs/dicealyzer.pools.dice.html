@@ -37,16 +37,43 @@
 <span id="dicealyzer-pools-dice-module"></span><h1>dicealyzer.pools.dice module<a class="headerlink" href="#module-dicealyzer.pools.dice" title="Permalink to this headline">¶</a></h1>
 <p>A module to represent dice pools consisting of one type of dice.</p>
 <dl class="py class">
+<dt id="dicealyzer.pools.dice.DiceTypePool">
+<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.dice.</code><code class="sig-name descname">DiceTypePool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dicealyzer.pools.base.html#dicealyzer.pools.base.AbstractDicePool" title="dicealyzer.pools.base.AbstractDicePool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.base.AbstractDicePool</span></code></a></p>
+<p>A class to represent a dicepool with multiple of one dice.</p>
+<dl class="py method">
+<dt id="dicealyzer.pools.dice.DiceTypePool.roll_all">
+<code class="sig-name descname">roll_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.roll_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.roll_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll all the dice in this pool and return results as a list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.dice.DiceTypePool.roll">
+<code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.roll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
+dice as a list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.dice.DiceTypePool.values">
+<em class="property">property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
+preferred, but not required.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.dice.DiceTypePool.probability">
+<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.probability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the probability of a certain value being rolled.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="dicealyzer.pools.dice.DiceDropPool">
 <em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.dice.</code><code class="sig-name descname">DiceDropPool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">drop</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">highest</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceDropPool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceDropPool" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#dicealyzer.pools.dice.DiceTypePool" title="dicealyzer.pools.dice.DiceTypePool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.dice.DiceTypePool</span></code></a></p>
 <p>A class to represent a dicepool where the lowest or highest dice are dropped.</p>
-<dl class="py method">
-<dt id="dicealyzer.pools.dice.DiceDropPool.probability">
-<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceDropPool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceDropPool.probability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the probability of a certain value being rolled.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt id="dicealyzer.pools.dice.DiceDropPool.roll">
 <code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceDropPool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceDropPool.roll" title="Permalink to this definition">¶</a></dt>
@@ -61,37 +88,10 @@ dice as a list.</p>
 preferred, but not required.</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt id="dicealyzer.pools.dice.DiceTypePool">
-<em class="property">class </em><code class="sig-prename descclassname">dicealyzer.pools.dice.</code><code class="sig-name descname">DiceTypePool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sides</span></em>, <em class="sig-param"><span class="n">amount</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dicealyzer.pools.base.html#dicealyzer.pools.base.AbstractDicePool" title="dicealyzer.pools.base.AbstractDicePool"><code class="xref py py-class docutils literal notranslate"><span class="pre">dicealyzer.pools.base.AbstractDicePool</span></code></a></p>
-<p>A class to represent a dicepool with multiple of one dice.</p>
 <dl class="py method">
-<dt id="dicealyzer.pools.dice.DiceTypePool.probability">
-<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.probability" title="Permalink to this definition">¶</a></dt>
+<dt id="dicealyzer.pools.dice.DiceDropPool.probability">
+<code class="sig-name descname">probability</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceDropPool.probability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceDropPool.probability" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the probability of a certain value being rolled.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.dice.DiceTypePool.roll">
-<code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.roll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
-dice as a list.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.dice.DiceTypePool.roll_all">
-<code class="sig-name descname">roll_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/dice.html#DiceTypePool.roll_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.roll_all" title="Permalink to this definition">¶</a></dt>
-<dd><p>Roll all the dice in this pool and return results as a list</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.dice.DiceTypePool.values">
-<em class="property">property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.dice.DiceTypePool.values" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
-preferred, but not required.</p>
 </dd></dl>
 
 </dd></dl>

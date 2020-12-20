@@ -35,15 +35,21 @@
   <div class="section" id="module-dicealyzer.transformer">
 <span id="dicealyzer-transformer-module"></span><h1>dicealyzer.transformer module<a class="headerlink" href="#module-dicealyzer.transformer" title="Permalink to this headline">¶</a></h1>
 <p>This module contains the transformer class, that turns a given parse tree into a dice pool.</p>
+<dl class="py function">
+<dt id="dicealyzer.transformer.keep_sum">
+<code class="sig-prename descclassname">dicealyzer.transformer.</code><code class="sig-name descname">keep_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rolls</span></em>, <em class="sig-param"><span class="n">keep</span></em>, <em class="sig-param"><span class="n">lowest</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#keep_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.keep_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>A small helper function for keeping certain dice rolls</p>
+</dd></dl>
+
 <dl class="py class">
 <dt id="dicealyzer.transformer.DicePoolTransformer">
 <em class="property">class </em><code class="sig-prename descclassname">dicealyzer.transformer.</code><code class="sig-name descname">DicePoolTransformer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">visit_tokens</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://lark-parser.readthedocs.io/en/latest/visitors.html#lark.visitors.Transformer" title="(in Lark)"><code class="xref py py-class docutils literal notranslate"><span class="pre">lark.visitors.Transformer</span></code></a></p>
 <p>Transforms a read statement into a dice pool that can be rolled multiple times.</p>
 <dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.add" title="Permalink to this definition">¶</a></dt>
-<dd><p>Combined several dice pools by adding them up.</p>
+<dt id="dicealyzer.transformer.DicePoolTransformer.number">
+<code class="sig-name descname">number</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numbers should be read as ints.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -59,21 +65,21 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.div">
-<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.div" title="Permalink to this definition">¶</a></dt>
-<dd><p>Combined several dice pools by dividing them.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.drop_highest">
-<code class="sig-name descname">drop_highest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dice</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.drop_highest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.drop_highest" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads in a dice pool that drops the highest dice.</p>
+<dt id="dicealyzer.transformer.DicePoolTransformer.pool">
+<code class="sig-name descname">pool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dice</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.pool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.pool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a simple dice pool.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="dicealyzer.transformer.DicePoolTransformer.drop_lowest">
 <code class="sig-name descname">drop_lowest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dice</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.drop_lowest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.drop_lowest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads in a dice pool that drops the lowest dice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.transformer.DicePoolTransformer.drop_highest">
+<code class="sig-name descname">drop_highest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dice</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.drop_highest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.drop_highest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in a dice pool that drops the highest dice.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -89,27 +95,9 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.mul">
-<code class="sig-name descname">mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.mul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Combined several dice pools by multipolying them.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.number">
-<code class="sig-name descname">number</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.number"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Numbers should be read as ints.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.pool">
-<code class="sig-name descname">pool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dice</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.pool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.pool" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads in a simple dice pool.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.transformer.DicePoolTransformer.start">
-<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.start" title="Permalink to this definition">¶</a></dt>
-<dd><p>This grammar only returns one object, which is a dice pool.</p>
+<dt id="dicealyzer.transformer.DicePoolTransformer.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combined several dice pools by adding them up.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -118,12 +106,24 @@
 <dd><p>Combined several dice pools by subtracting them.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="dicealyzer.transformer.DicePoolTransformer.mul">
+<code class="sig-name descname">mul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.mul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.mul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combined several dice pools by multipolying them.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt id="dicealyzer.transformer.keep_sum">
-<code class="sig-prename descclassname">dicealyzer.transformer.</code><code class="sig-name descname">keep_sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rolls</span></em>, <em class="sig-param"><span class="n">keep</span></em>, <em class="sig-param"><span class="n">lowest</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#keep_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.keep_sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>A small helper function for keeping certain dice rolls</p>
+<dl class="py method">
+<dt id="dicealyzer.transformer.DicePoolTransformer.div">
+<code class="sig-name descname">div</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p1</span></em>, <em class="sig-param"><span class="n">p2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.div"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.div" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combined several dice pools by dividing them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.transformer.DicePoolTransformer.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">n</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/transformer.html#DicePoolTransformer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.transformer.DicePoolTransformer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>This grammar only returns one object, which is a dice pool.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

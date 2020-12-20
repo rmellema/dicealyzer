@@ -43,15 +43,10 @@
 <p>The abstract base class for all dice pools. Defines several convinience methods based on the
 abstract methods presented.</p>
 <dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.expected_value">
-<code class="sig-name descname">expected_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.expected_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.expected_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the expected value of this dice pool.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.pred_prob">
-<code class="sig-name descname">pred_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.pred_prob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.pred_prob" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate the probability that a roll from this dice pool adheres to the given predicate</p>
+<dt id="dicealyzer.pools.base.AbstractDicePool.roll">
+<em class="property">abstract </em><code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.roll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
+dice as a list.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -61,33 +56,10 @@ abstract methods presented.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.prob">
-<code class="sig-name descname">prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob" title="Permalink to this definition">¶</a></dt>
-<dd><p>Alias for <cite>probability</cite></p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.prob_greater_equal">
-<code class="sig-name descname">prob_greater_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_greater_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_greater_equal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Give the probability that this dice pool rolls equal to or higher than <cite>value</cite>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.prob_greater_than">
-<code class="sig-name descname">prob_greater_than</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_greater_than"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_greater_than" title="Permalink to this definition">¶</a></dt>
-<dd><p>Give the probability that this dice pool rolls a number higher than <cite>value</cite>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.prob_less_equal">
-<code class="sig-name descname">prob_less_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_less_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_less_equal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Give the probability that this dice pool rolls equal to or lower than <cite>value</cite>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.prob_less_than">
-<code class="sig-name descname">prob_less_than</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_less_than"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_less_than" title="Permalink to this definition">¶</a></dt>
-<dd><p>Give the probability that this dice pool rolls a number strictly lower than <cite>value</cite>.</p>
+<dt id="dicealyzer.pools.base.AbstractDicePool.values">
+<em class="property">abstract property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
+preferred, but not required.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -97,17 +69,45 @@ abstract methods presented.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.roll">
-<em class="property">abstract </em><code class="sig-name descname">roll</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.roll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.roll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Roll the dice in this pool, and return the result. Also returns the values of all rolled
-dice as a list.</p>
+<dt id="dicealyzer.pools.base.AbstractDicePool.prob">
+<code class="sig-name descname">prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for <cite>probability</cite></p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="dicealyzer.pools.base.AbstractDicePool.values">
-<em class="property">abstract property </em><code class="sig-name descname">values</code><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.values" title="Permalink to this definition">¶</a></dt>
-<dd><p>All the possible values that this dice pool can produce, as a set. Ascending order is
-preferred, but not required.</p>
+<dt id="dicealyzer.pools.base.AbstractDicePool.pred_prob">
+<code class="sig-name descname">pred_prob</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pred</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.pred_prob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.pred_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the probability that a roll from this dice pool adheres to the given predicate</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.base.AbstractDicePool.prob_greater_than">
+<code class="sig-name descname">prob_greater_than</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_greater_than"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_greater_than" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the probability that this dice pool rolls a number higher than <cite>value</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.base.AbstractDicePool.prob_greater_equal">
+<code class="sig-name descname">prob_greater_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_greater_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_greater_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the probability that this dice pool rolls equal to or higher than <cite>value</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.base.AbstractDicePool.prob_less_than">
+<code class="sig-name descname">prob_less_than</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_less_than"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_less_than" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the probability that this dice pool rolls a number strictly lower than <cite>value</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.base.AbstractDicePool.prob_less_equal">
+<code class="sig-name descname">prob_less_equal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.prob_less_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.prob_less_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the probability that this dice pool rolls equal to or lower than <cite>value</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="dicealyzer.pools.base.AbstractDicePool.expected_value">
+<code class="sig-name descname">expected_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dicealyzer/pools/base.html#AbstractDicePool.expected_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#dicealyzer.pools.base.AbstractDicePool.expected_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the expected value of this dice pool.</p>
 </dd></dl>
 
 </dd></dl>
