@@ -1,0 +1,36 @@
+start: (expression | WS)*
+
+?expression: value
+           | operation
+
+?operation: product
+          | operation "+" product -> add
+          | operation "-" product -> sub
+
+?product: value
+        | product "*" value -> mul
+        | product "/" value -> div
+
+?value: pool
+      | constpool
+      | "(" expression ")"
+
+constpool: number
+
+pool: dice
+    | dice "-L" -> drop_lowest
+    | dice "-H" -> drop_highest
+    | dice "l" number -> keep_lowest
+    | dice ("k" | "h") number -> keep_highest
+
+dice: number? ("d" | "D") number
+
+number: NUMBER
+
+COMMENT: /#.*/
+
+%import common.LETTER
+%import common.INT -> NUMBER
+%import common.WS
+%ignore COMMENT
+%ignore WS
