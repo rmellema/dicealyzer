@@ -58,29 +58,32 @@ class BinaryOperatorPool(AbstractDicePool):
                         for operand in self.operands]
         return ' {} '.format(self.operator_str).join(str_operands)
 
+    def __repr__(self):
+        str_operands = ', '.join([repr(operand) for operand in self.operands])
+        return '{}.BinaryOperatorPool({}, {}, {})'.format(__name__,
+                                                          repr(self.operator),
+                                                          repr(self.operator_str),
+                                                          str_operands)
+
 class SumPool(BinaryOperatorPool):
     "Create a sum of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(add, '+', *operands)
-AbstractDicePool.__add__ = lambda l, r: SumPool(l, r).simplify()
 
 class SubtractPool(BinaryOperatorPool):
     "Create a negative sum of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(sub, '-', *operands)
-AbstractDicePool.__sub__ = lambda l, r: SubtractPool(l, r).simplify()
 
 class ProductPool(BinaryOperatorPool):
     "Create a product of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(mul, '*', *operands)
-AbstractDicePool.__mul__ = lambda l, r: ProductPool(l, r).simplify()
 
 class DivisionPool(BinaryOperatorPool):
     "Create a fraction of multiple dice pools."
     def __init__(self, *operands):
         super().__init__(div, '/', *operands)
-AbstractDicePool.__truediv__ = lambda l, r: DivisionPool(l, r).simplify()
 
 class ConstPool(AbstractDicePool):
     """
@@ -92,6 +95,9 @@ class ConstPool(AbstractDicePool):
 
     def __str__(self):
         return str(self.const)
+
+    def __repr__(self):
+        return '{}.ConstPool({})'.format(__name__, self.const)
 
     def roll(self):
         # There are no dice rolled here, so return an empty list

@@ -3,8 +3,8 @@ Tests for the various operator pools.
 """
 import unittest as ut
 
-from diceroller.pools.operator import SumPool, SubtractPool, ProductPool, DivisionPool
-from diceroller.pools.dice import DiceTypePool as Dice
+from dicealyzer.pools.operator import SumPool, SubtractPool, ProductPool, DivisionPool, ConstPool
+from dicealyzer.pools.dice import DiceTypePool as Dice
 
 class BinaryOperatorTests(ut.TestCase):
     "Test cases for the binary operator."
@@ -31,3 +31,22 @@ class BinaryOperatorTests(ut.TestCase):
         "Test the sum for probabilities for the DivisionPool"
         pool = DivisionPool(Dice(6, 2), Dice(4, 3))
         self.assertProbSum(pool)
+
+class ConstCase(ut.TestCase):
+    "Test case for the number pool"
+    def test_roll(self):
+        "Test if the roll always gives back the same value"
+        pool = ConstPool(6)
+        self.assertEqual(6, pool.roll()[0])
+
+    def test_values(self):
+        "Test is the values given back are only the number given"
+        pool = ConstPool(5)
+        self.assertEqual(1, len(pool.values))
+        self.assertIn(5, pool.values)
+
+    def test_probability(self):
+        "Make sure the probability is always either one or zero"
+        pool = ConstPool(4)
+        self.assertEqual(0, pool.probability(3))
+        self.assertEqual(1, pool.probability(4))

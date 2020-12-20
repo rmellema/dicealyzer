@@ -4,15 +4,15 @@ The setup script for tarski.py. Can be used to install the module in the usual w
 from codecs import open
 from distutils.core import setup
 
-import diceroller
+import dicealyzer
 
 with open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
 
-setup(name='diceroller.py',
+setup(name='dicealyzer.py',
       # Meta data
-      version=diceroller.__VERSION__,
-      description="Simple dice roller application to play around with lark parser",
+      version=dicealyzer.__VERSION__,
+      description="Tools for rolling dice and analyzing them.",
       long_description=long_description,
       keywords='logic',
       license='MIT',
@@ -20,12 +20,13 @@ setup(name='diceroller.py',
       # Author information
       author='René Mellema',
       author_email='rene.mellema@gmail.com',
-      packages=['diceroller'],
+      packages=['dicealyzer'],
 
       # Requirements
       install_requires=['lark-parser'],
       extras_require={
-          'dev': ['pylint>=1.7'],
+          'dev': ['pylint>=1.7',
+                  'spinx>=4.0.0'],
           },
       python_requires='~=3.4',
 

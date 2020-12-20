@@ -8,7 +8,7 @@ from . import pools, transformer
 __VERSION__ = '0.0.1'
 
 _grammar_file = pathlib.Path(__file__).parent.absolute() / 'grammar.lark'
-_parser = Lark(_grammar_file)
+_parser = Lark(_grammar_file.open().read())
 _transformer = transformer.DicePoolTransformer()
 
 def read_dice(string):

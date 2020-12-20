@@ -3,7 +3,7 @@ Unittests for the pools.dice package.
 """
 import unittest as ut
 
-from diceroller.pools.dice import DiceTypePool, DiceDropPool
+from dicealyzer.pools.dice import DiceTypePool, DiceDropPool
 
 class DiceTypePoolTester(ut.TestCase):
     "Test case for the DiceTypePool"
